@@ -1,6 +1,16 @@
+// src/supabaseClient.js
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = 'https://jfxifqjnzdfqtcrtedof.supabase.co';
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpmeGlmcWpuemRmcXRjcnRlZG9mIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg1NTczNTYsImV4cCI6MjEwNDEzMzM1Nn0.PHMDWBg_b51BsoQ-XJnMl15PYx8lr304LfYYeNzIghs';
+// Récupération sécurisée des variables d'environnement Vite
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.warn(
+    "[Supabase] Attention : Les variables VITE_SUPABASE_URL ou VITE_SUPABASE_ANON_KEY sont indéfinies. " +
+    "Vérifiez votre fichier .env.local ou les Environment Variables sur Vercel."
+  );
+}
+
+// Exportation de l'instance singleton Supabase
+export const supabase = createClient(supabaseUrl || '', supabaseAnonKey || '');
