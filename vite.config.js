@@ -1,21 +1,8 @@
-// vite.config.js
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-
-// Configuration optimisée pour bundler Vite + React
-export default defineConfig({
-  plugins: [react()],
-  build: {
-    outDir: 'dist',
-    sourcemap: false,
-    chunkSizeWarningLimit: 1000, // Ajuste le seuil d'avertissement de chunking
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          supabase: ['@supabase/supabase-js']
-        }
-      }
-    }
-  }
-});
+// src/version.js
+/**
+ * Métadonnées officielles de versioning de la plateforme SGPP
+ * Standard SemVer : Majeur.Mineur.Correctif
+ */
+export const APP_VERSION = "1.0.0";
+export const RELEASE_NAME = "Registre Domanial & Console Chef de Port";
+export const BUILD_DATE = new Date().toISOString().split('T')[0];
